@@ -1,7 +1,27 @@
-我依論文（arXiv 2604.02334）寫了單檔參考實作 holos.py，純 Python + numpy，離線可跑。python holos.py demo 跑完整流程，python holos.py sim 跑經濟模擬。
+# 我依論文（arXiv 2604.02334）寫了單檔參考實作
 
-python bench_nuwa.py 
+ holos.py，純 Python + numpy，離線可跑。
 
+## Installation 
+`git clone https://github.com/ovidwu115/holos`
+`pip install numpy`
+
+
+## Usage 
+
+跑完整流程，
+
+`python holos.py demo`
+
+跑經濟模擬。
+
+`python holos.py sim`
+
+跑 bench
+
+`python bench_nuwa.py`
+
+```
   seeds    50,000     0.3s
   seeds   100,000     0.6s
   seeds   149,999     0.9s
@@ -38,3 +58,4 @@ population | point lookup mean/P99 (ms) | top-10 retrieval mean/P99 (ms)
 
 JIT instantiate (profile fetch + S-MMR K=5, 40-tool pool): mean 0.31 ms, P99 0.38 ms
 final RSS 1352 MB
+```
