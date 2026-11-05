@@ -1,4 +1,4 @@
-# 論文（arXiv 2604.02334）參考實作計畫
+# 論文（arXiv 2604.02334）實作計畫
 
  holos.py，純 Python + numpy，離線可跑。
 
