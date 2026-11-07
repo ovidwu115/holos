@@ -89,7 +89,7 @@ final RSS 1352 MB
 
 跑 Gemini 百萬壓測
 
-`
+```
 import ray
 import time
 import random
@@ -178,7 +178,8 @@ if __name__ == "__main__":
     
     # 執行非同步壓測迴圈
     asyncio.run(tester.run_load_test(concurrent_tasks=20000))
-`
+```
+
 ```
 (raylet) WARNING: 82 PYTHON worker processes have been started on node
 ```
