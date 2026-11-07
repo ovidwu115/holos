@@ -59,3 +59,30 @@ population | point lookup mean/P99 (ms) | top-10 retrieval mean/P99 (ms)
 JIT instantiate (profile fetch + S-MMR K=5, 40-tool pool): mean 0.31 ms, P99 0.38 ms
 final RSS 1352 MB
 ```
+跑 Gemini 版本
+
+`python holos_gemini.py`
+
+```
+✨ [NuwaEngine] 成功生成 Agent: agent_e7a2c8 (Role: Web Crawler)
+✨ [NuwaEngine] 成功生成 Agent: agent_63faab (Role: Data Analyst)
+
+🚀 [Orchestrator] 任務 Pipeline 通過 DAG 驗證，最佳執行 順序: ['task_1', 'task_2']
+
+🤖 [Agent agent_e7a2c8] 正在處理任務: '抓取網頁資料'
+🤖 [Agent agent_63faab] 正在處理任務: '分析抓取到的數據'
+
+✅ [Pipeline 執行完畢結果]:
+{
+  "task_1": {
+    "status": "success",
+    "result": "Processed '抓取網頁資料' with inputs {}",
+    "agent_id": "agent_e7a2c8"
+  },
+  "task_2": {
+    "status": "success",
+    "result": "Processed '分析抓取到的數據' with inputs {'task_1': \"Processed '抓取網頁資料' with inputs {}\"}",
+    "agent_id": "agent_63faab"
+  }
+}
+```
