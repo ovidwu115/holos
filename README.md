@@ -1,5 +1,7 @@
 # 論文（arXiv 2604.02334）實作計畫
-
+Independent implementation / reproduction of arXiv:2604.02334.
+Not affiliated with the paper authors. Not the official Holos implementation.
+Benchmark scope: seed generation / retrieval, not 1M live LLM agents.
  holos.py，純 Python + numpy，離線可跑。
 
 ## Installation 
