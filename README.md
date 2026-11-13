@@ -187,4 +187,42 @@ if __name__ == "__main__":
 ```
 ```
 ray.exceptions.OutOfMemoryError:
+
+## Benchmark: Million-Seed Stress Test
+
+> **Scope — read this before quoting the numbers:**
+> This benchmarks **seed generation / retrieval, no LLM**.
+> It is **NOT** 1,000,000 live LLM agents.
+> The Ray distributed stress test is tracked separately below as a known bottleneck — it ended in `OutOfMemoryError` on a single node, not a completed run.
+
+### Seed creation scales linearly
+
+![Holos bench_nuwa.py — Seed creation scaling and lookup / retrieval latency vs population](docs/bench/holos_million_bench.jpg)
+
+- `N = 1,000,000` seeds created in **8.6 s** — **116,819 seeds/s, no LLM**
+- Disk: **193.4 MB** (**193 B/agent**; 10M est. 1.93 GB)
+- RSS: **1,338 MB** total (vector index **1,024 MB = 1,024 B/agent**)
+- Final RSS: **1,352 MB**
+
+### The bottleneck is retrieval, not point lookup
+
+![Holos at N=1,000,000 — Key latencies (bench_nuwa.py, no LLM)](docs/bench/holos_million_latency_1M.png)
+
+| Population | Point lookup mean / P99 (ms) | Top-10 retrieval mean / P99 (ms) |
+| --- | --- | --- |
+| 10 | 0.009 / 0.022 | 0.01 / 0.03 |
+| 100 | 0.009 / 0.018 | 0.01 / 0.02 |
+| 1,000 | 0.012 / 0.025 | 0.04 / 0.06 |
+| 10,000 | 0.011 / 0.018 | 0.46 / 0.82 |
+| 100,000 | 0.013 / 0.023 | 7.34 / 7.78 |
+| 1,000,000 | 0.014 / 0.021 | 74.96 / 84.18 |
+
+- **Point lookup stays flat** from 10 → 1M: mean 0.009 ms → 0.014 ms.
+- **Top-10 retrieval is the scaling friction**: 0.46 ms @ 10k → 7.34 ms @ 100k → 74.96 ms @ 1M.
+- **JIT instantiate** (profile fetch + S-MMR K=5, 40-tool pool): mean **0.31 ms**, P99 **0.38 ms**.
+
+### Reproduce
+
+```bash
+python bench_nuwa.py
 ```
