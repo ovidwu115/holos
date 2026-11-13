@@ -187,6 +187,7 @@ if __name__ == "__main__":
 ```
 ```
 ray.exceptions.OutOfMemoryError:
+```
 
 ## Benchmark: Million-Seed Stress Test
 
