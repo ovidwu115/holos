@@ -198,7 +198,7 @@ ray.exceptions.OutOfMemoryError:
 
 ### Seed creation scales linearly
 
-![Holos bench_nuwa.py — Seed creation scaling and lookup / retrieval latency vs population](docs/bench/holos_million_bench.jpg)
+![Holos bench_nuwa.py — Seed creation scaling and lookup / retrieval latency vs population](docs/bench/holos_million_bench.png)
 
 - `N = 1,000,000` seeds created in **8.6 s** — **116,819 seeds/s, no LLM**
 - Disk: **193.4 MB** (**193 B/agent**; 10M est. 1.93 GB)
