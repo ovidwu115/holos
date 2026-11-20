@@ -227,4 +227,4 @@ ray.exceptions.OutOfMemoryError:
 ```bash
 python bench_nuwa.py
 ```
-(docs/bench/million-agent-gke-ray-cluster.png)
+![Setup kuberay cluster for million agent strees test](docs/bench/million-agent-gke-ray-cluster.png)
