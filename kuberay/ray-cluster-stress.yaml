@@ -1,0 +1,36 @@
+apiVersion: ray.io/v1
+kind: RayCluster
+metadata:
+  name: million-agent-cluster
+spec:
+  rayVersion: "2.35.0"
+  enableInTreeAutoscaling: true
+  autoscalerOptions:
+    idleTimeoutSeconds: 900
+    upscalingMode: "Default"
+  headGroupSpec:
+    rayStartParams:
+      dashboard-host: "0.0.0.0"
+    template:
+      spec:
+        containers:
+          - name: ray-head
+            image: rayproject/ray:2.35.0-py310
+            resources:
+              limits: { cpu: "2", memory: "2Gi" }
+              requests: { cpu: "2", memory: "2Gi" }
+  workerGroupSpecs:
+    - groupName: agent-workers
+      replicas: 5
+      minReplicas: 3
+      maxReplicas: 50
+      rayStartParams:
+        object-store-memory: "268435456"
+      template:
+        spec:
+          containers:
+            - name: ray-worker
+              image: rayproject/ray:2.35.0-py310
+              resources:
+                limits: { cpu: "1", memory: "1Gi" }
+                requests: { cpu: "0.5", memory: "500Mi" }
