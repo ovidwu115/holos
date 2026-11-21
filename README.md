@@ -228,3 +228,15 @@ ray.exceptions.OutOfMemoryError:
 python bench_nuwa.py
 ```
 ![Setup kuberay cluster for million agent strees test](docs/bench/million-agent-gke-ray-cluster.png)
+
+```
+$ ray job submit   --address="http://127.0.0.1:8265"   --submission-id="million-agent-100-v10"   --working-dir ./ray_stress_job   --no-wait   -- python million_agent_stress.py --target-agents 100 --batch-size 10 --step-rounds 1
+```
+```
+ray job status --address="http://127.0.0.1:8265" million-agent-100-v10                        Job submission server address: http://127.0.0.1:8265                                                            -------------------------------------
+Job 'million-agent-100-v10' succeeded
+-------------------------------------
+```
+
+![10 to 100 agents strees test](docs/bench/million-agent-gke-ray-cluster-10-agent.png)
+
